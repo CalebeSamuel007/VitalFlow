@@ -8,6 +8,7 @@ type Item = {
   glicemia: string;
   peso: string;
   exercicios: string;
+  pressao: string;
 };
  
 export default function ExploreScreen() {
@@ -18,7 +19,8 @@ export default function ExploreScreen() {
       novoItem.nome.trim() !== '' &&
       novoItem.glicemia.trim() !== '' &&
       novoItem.peso.trim() !== '' &&
-      novoItem.exercicios.trim() !== ''
+      novoItem.exercicios.trim() !== '' &&
+      novoItem.pressao.trim() !== ''
     ) {
       setItens([...itens, novoItem]);
     }

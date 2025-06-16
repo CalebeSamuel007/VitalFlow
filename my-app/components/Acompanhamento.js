@@ -6,6 +6,7 @@ type Item = {
   glicemia: string;
   peso: string;
   exercicios: string;
+  pressao: string;
 };
 type AcompanhamentoProps = {
   itens: Item[];
@@ -23,6 +24,7 @@ const Acompanhamento: React.FC<AcompanhamentoProps> = ({ itens, removerItem }) =
           <Text style={styles.valorText}>Glicemia: <Text style={styles.valorNumber}>{item.glicemia} mg/dL</Text></Text>
           <Text style={styles.valorText}>Peso: <Text style={styles.valorNumber}>{item.peso} kg</Text></Text>
           <Text style={styles.valorText}>Exercícios: <Text style={styles.valorString}>{item.exercicios}</Text></Text>
+          <Text style={styles.valorText}>Pressão: <Text style={styles.valorNumber}>{item.pressao}</Text></Text>
         </View>
         <TouchableOpacity onPress={() => removerItem(index)}>
           <Text style={styles.removeButton}>Remover</Text>

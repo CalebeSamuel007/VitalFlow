@@ -6,6 +6,7 @@ type Item = {
   glicemia: string;
   peso: string;
   exercicios: string;
+  pressao: string;
 };
 
 type FormsAcompanhamentoProps = {
@@ -17,6 +18,7 @@ const FormsAcompanhamento: React.FC<FormsAcompanhamentoProps> = ({ adicionarItem
   const [glicemia, setGlicemia] = useState('');
   const [peso, setPeso] = useState('');
   const [exercicios, setExercicios] = useState('');
+  const [pressao, setPressao] = useState('');
 
   // Permite apenas números e vírgula/ponto para decimal para glicemia
   const handleGlicemiaChange = (text: string) => {
@@ -65,15 +67,22 @@ const handleExerciciosChange = (text: string) => {
       nome,
       glicemia: Number(glicemia).toFixed(2),
       peso: Number(peso).toFixed(2),
-      exercicios // <-- adicione esta linha!
+      exercicios,
+      pressao
     });
     setNome('');
     setGlicemia('');
     setPeso('');
     setExercicios('');
+    setPressao('')
   } else {
     Alert.alert('Erro', 'Preencha todos os campos corretamente. Glicemia e Peso devem ser numéricos com até duas casas decimais.');
   }
+};
+
+const handlePressaoChange = (text) => {
+  let sanitized = text.replace(/[^0-9/ ]/g, '');
+  setPressao(sanitized);
 };
 
   return (
@@ -85,6 +94,14 @@ const handleExerciciosChange = (text: string) => {
         value={nome}
         onChangeText={setNome}
         placeholderTextColor="#90A4AE"
+      />
+      <TextInput
+      style={styles.input}
+      placeholder="Pressão Arterial (ex: 120/80)"
+      value={pressao}
+      onChangeText={handlePressaoChange}
+      maxLength={10}
+      placeholderTextColor="#90A4AE"
       />
       <TextInput
         style={styles.input}
