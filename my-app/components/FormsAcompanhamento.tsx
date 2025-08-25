@@ -48,42 +48,41 @@ const FormsAcompanhamento: React.FC<FormsAcompanhamentoProps> = ({ adicionarItem
     setPeso(sanitized);
   };
 
-const handleExerciciosChange = (text: string) => {
-  // Permite letras, números, acentos e espaços
-  let sanitized = text.replace(/[^a-zA-ZÀ-ÿ0-9\s]/g, '');
-  setExercicios(sanitized);
-};
-
+  const handleExerciciosChange = (text: string) => {
+    // Permite letras, números, acentos e espaços
+    let sanitized = text.replace(/[^a-zA-ZÀ-ÿ0-9\s]/g, '');
+    setExercicios(sanitized);
+  };
 
   const handleAdicionar = () => {
-  if (
-    nome.trim() !== '' &&
-    glicemia.trim() !== '' &&
-    peso.trim() !== '' &&
-    /^[0-9]+(\.[0-9]{1,2})?$/.test(glicemia) &&
-    /^[0-9]+(\.[0-9]{1,2})?$/.test(peso)
-  ) {
-    adicionarItem({
-      nome,
-      glicemia: Number(glicemia).toFixed(2),
-      peso: Number(peso).toFixed(2),
-      exercicios,
-      pressao
-    });
-    setNome('');
-    setGlicemia('');
-    setPeso('');
-    setExercicios('');
-    setPressao('')
-  } else {
-    Alert.alert('Erro', 'Preencha todos os campos corretamente. Glicemia e Peso devem ser numéricos com até duas casas decimais.');
-  }
-};
+    if (
+      nome.trim() !== '' &&
+      glicemia.trim() !== '' &&
+      peso.trim() !== '' &&
+      /^[0-9]+(\.[0-9]{1,2})?$/.test(glicemia) &&
+      /^[0-9]+(\.[0-9]{1,2})?$/.test(peso)
+    ) {
+      adicionarItem({
+        nome,
+        glicemia: Number(glicemia).toFixed(2),
+        peso: Number(peso).toFixed(2),
+        exercicios,
+        pressao
+      });
+      setNome('');
+      setGlicemia('');
+      setPeso('');
+      setExercicios('');
+      setPressao('');
+    } else {
+      Alert.alert('Erro', 'Preencha todos os campos corretamente. Glicemia e Peso devem ser numéricos com até duas casas decimais.');
+    }
+  };
 
-const handlePressaoChange = (text) => {
-  let sanitized = text.replace(/[^0-9/ ]/g, '');
-  setPressao(sanitized);
-};
+  const handlePressaoChange = (text: string) => {
+    let sanitized = text.replace(/[^0-9/ ]/g, '');
+    setPressao(sanitized);
+  };
 
   return (
     <View style={styles.card}>
@@ -93,15 +92,15 @@ const handlePressaoChange = (text) => {
         placeholder="Nome"
         value={nome}
         onChangeText={setNome}
-        placeholderTextColor="#90A4AE"
+        placeholderTextColor="#66bb6a"
       />
       <TextInput
-      style={styles.input}
-      placeholder="Pressão Arterial (ex: 120/80)"
-      value={pressao}
-      onChangeText={handlePressaoChange}
-      maxLength={10}
-      placeholderTextColor="#90A4AE"
+        style={styles.input}
+        placeholder="Pressão Arterial (ex: 120/80)"
+        value={pressao}
+        onChangeText={handlePressaoChange}
+        maxLength={10}
+        placeholderTextColor="#66bb6a"
       />
       <TextInput
         style={styles.input}
@@ -110,7 +109,7 @@ const handlePressaoChange = (text) => {
         onChangeText={handleGlicemiaChange}
         keyboardType="numeric"
         maxLength={10}
-        placeholderTextColor="#90A4AE"
+        placeholderTextColor="#66bb6a"
       />
       <TextInput
         style={styles.input}
@@ -119,47 +118,55 @@ const handlePressaoChange = (text) => {
         onChangeText={handlePesoChange}
         keyboardType="numeric"
         maxLength={10}
-        placeholderTextColor="#90A4AE"
+        placeholderTextColor="#66bb6a"
       />
       <TextInput
         style={styles.input}
         placeholder="Exercícios"
         value={exercicios}
         onChangeText={handleExerciciosChange}
-        placeholderTextColor="#90A4AE"
+        placeholderTextColor="#66bb6a"
       />
-      <Button title="Adicionar" onPress={handleAdicionar} color="#1976D2" />
+      <View style={styles.buttonContainer}>
+        <Button title="Adicionar" onPress={handleAdicionar} color="#388E3C" />
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#fff',
-    borderRadius: 12,
-    padding: 20,
-    marginBottom: 16,
-    shadowColor: '#000',
-    shadowOpacity: 0.07,
-    shadowRadius: 8,
-    elevation: 3,
+    backgroundColor: '#E8F5E9', // verde claro
+    borderRadius: 16,
+    padding: 24,
+    marginBottom: 20,
+    shadowColor: '#388E3C',
+    shadowOpacity: 0.10,
+    shadowRadius: 10,
+    elevation: 4,
   },
   title: {
     fontSize: 22,
     fontWeight: 'bold',
-    marginBottom: 16,
-    color: '#1976D2',
+    marginBottom: 18,
+    color: '#2E7D32', // verde escuro
     alignSelf: 'center',
+    letterSpacing: 0.5,
   },
   input: {
     borderWidth: 1,
-    borderColor: '#B0BEC5',
-    padding: 12,
-    marginBottom: 12,
-    borderRadius: 8,
+    borderColor: '#A5D6A7', // verde médio
+    padding: 14,
+    marginBottom: 14,
+    borderRadius: 10,
     fontSize: 16,
-    backgroundColor: '#F5F5F5',
-    color: '#263238',
+    backgroundColor: '#F1F8E9', // verde muito claro
+    color: '#1B5E20', // verde bem escuro
+  },
+  buttonContainer: {
+    marginTop: 8,
+    borderRadius: 8,
+    overflow: 'hidden',
   },
 });
 
